@@ -1,0 +1,280 @@
+/* --- /settings/css/settings.css --- */
+
+/* Conteneur pour la liste des sous-menus */
+.settings-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-menu-item {
+    padding: 12px 15px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: var(--bg-content);
+    color: var(--text-color);
+    transition: background-color 0.2s;
+    font-weight: 600;
+}
+
+.settings-menu-item:hover {
+    background-color: var(--hover-bg);
+}
+
+.settings-menu-item.active {
+    background-color: var(--accent-color);
+    color: var(--bg-secondary); /* Texte clair sur fond accentué */
+}
+
+/* Styles pour le panneau de droite (Détails) */
+.setting-detail-panel h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+/* Styles pour les nouvelles sections de notifications/autorisations */
+.notification-section, .authorization-section {
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.notification-section h3, .authorization-section h3 {
+    margin-top: 0;
+    color: var(--text-color);
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+/* Base pour toutes les lignes de réglages */
+.setting-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-top: 1px dashed var(--border-color);
+}
+.setting-item-row:first-of-type {
+    border-top: none; 
+}
+
+.setting-item-row label {
+    flex-grow: 1;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Styles pour le contrôle des minutes (RANGE SLIDER) */
+.time-input-row {
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.time-input-row label {
+    flex-grow: 1; 
+    max-width: 60%; 
+}
+
+.input-with-unit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 35%; /* Garde le contrôle groupé à droite */
+    justify-content: flex-end;
+}
+
+/* Affichage de la valeur actuelle du curseur */
+.range-value-display {
+    width: 25px; 
+    text-align: right;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.unit-label {
+    color: var(--text-secondary);
+    width: 30px; 
+}
+
+/* Style du Range Input (Curseur) */
+.input-notif-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 120px; /* Largeur du curseur */
+    height: 6px;
+    background: var(--border-color);
+    outline: none;
+    opacity: 0.8;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 3px;
+}
+
+.input-notif-range:hover {
+    opacity: 1;
+}
+
+/* Style du pouce (le cercle/carré que l'on déplace) */
+.input-notif-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%; 
+    background: var(--accent-color);
+    cursor: pointer;
+    border: 2px solid var(--bg-content); /* Ajoute un petit contour */
+}
+
+.input-notif-range::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    cursor: pointer;
+    border: 2px solid var(--bg-content);
+}
+
+/* Styles pour le contrôle Audio */
+.audio-control-row {
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.audio-control-row label {
+    flex-grow: 0;
+    min-width: 150px; 
+}
+
+#notif-audio-select, #notif-message-audio-select { /* Ajout du sélecteur message */
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-content);
+    color: var(--text-color);
+    flex-grow: 1;
+    max-width: 250px; 
+}
+
+.action-button {
+    padding: 8px 15px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: filter 0.2s;
+    min-width: 80px; 
+    text-align: center;
+}
+
+.action-button:hover {
+    filter: brightness(1.1); 
+}
+
+
+/* --- Toggle Switch (Dark/Light & Master Toggles) --- */
+.theme-switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-secondary);
+}
+
+.theme-switch-label {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Le switch CSS moderne */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    min-width: 60px; 
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--accent-color);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color); 
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Palettes de couleurs */
+.color-palette-container {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 5px;
+}
+
+.color-palette-item {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.color-palette-item:hover {
+    opacity: 0.9;
+}
+
+.color-palette-item.active-color {
+    border-color: var(--accent-color); 
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+.color-palette-item.reset-color {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-color);
+    border: 1px dashed var(--border-color);
+    font-size: 1.2em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0; 
+}

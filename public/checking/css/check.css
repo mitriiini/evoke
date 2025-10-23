@@ -1,0 +1,246 @@
+/* /checking/css/check.css */
+
+/* --- Styles du Menu de Navigation (pour content-left) --- */
+.checking-menu .menu-item {
+    display: block;
+    padding: 15px 20px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.checking-menu .menu-item:hover {
+    background-color: var(--hover-color);
+}
+
+.checking-menu .menu-item.active {
+    background-color: var(--accent-color);
+    color: var(--primary-color-text);
+}
+
+.checking-menu .menu-item.active:hover {
+    background-color: var(--accent-color);
+}
+
+/* --- Styles du Conteneur Principal Check-in/out (pour content-right) --- */
+.check-container {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+    background-color: var(--background-secondary);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.work-status {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: var(--background-tertiary);
+    border: 1px solid var(--border-color);
+}
+
+/* Conteneur pour la disposition côte à côte */
+.check-actions-layout {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Conteneur du bouton (à gauche) */
+.action-button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* --- Style du Bouton Principal --- */
+.main-check-button {
+    width: 250px;
+    height: 250px;
+    padding: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color-text);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, transform 0.15s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.main-check-button.start-shift { background-color: #4CAF50; }
+.main-check-button.start-shift:hover { background-color: #45A049; transform: scale(1.05); }
+
+.main-check-button.start-pause { background-color: #2196F3; }
+.main-check-button.start-pause:hover { background-color: #1976D2; transform: scale(1.05); }
+
+.main-check-button.end-pause { background-color: #FF9800; }
+.main-check-button.end-pause:hover { background-color: #FB8C00; transform: scale(1.05); }
+
+.main-check-button.end-shift { background-color: #F44336; }
+.main-check-button.end-shift:hover { background-color: #D32F2F; transform: scale(1.05); }
+
+.main-check-button:active {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.main-check-button.disabled-time {
+    background-color: #6c757d !important;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+.main-check-button.disabled-time:hover {
+    transform: scale(1) !important;
+}
+
+/* Style pour la zone de résumé (à droite) */
+#shift-actions-summary {
+    width: 100%;
+    max-width: 450px;
+    text-align: left;
+    background-color: var(--background-primary);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
+}
+
+#shift-actions-summary h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-size: 1.4rem;
+}
+
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.action-row:last-child {
+    border-bottom: none;
+}
+
+.action-label {
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.action-time {
+    font-family: monospace;
+    font-size: 1.4rem;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.action-time.pending {
+    color: #FF9800;
+    font-style: italic;
+    font-size: 1.2rem;
+}
+
+.non-work-day {
+    color: #F44336;
+    font-size: 2rem;
+    margin-top: 50px;
+}
+
+/* --- Media query pour les petits écrans --- */
+@media (max-width: 768px) {
+    .check-actions-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-check-button {
+        width: 200px;
+        height: 200px;
+    }
+    #shift-actions-summary {
+        max-width: 100%;
+    }
+}
+
+/* --- Styles de Notification (Overlay) --- */
+#fullscreen-notification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.notification-content {
+    background-color: var(--background-primary);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 50px rgba(255, 255, 0, 0.7);
+    max-width: 80%;
+    text-align: center;
+    animation: pulse 1.5s infinite alternate;
+}
+
+.notification-content h1 {
+    color: #FFEB3B;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.notification-content p {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.notification-content button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.notification-content button:hover {
+    background-color: #0084ff;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}

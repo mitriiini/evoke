@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Connexion</title>
+    <link rel="stylesheet" href="/evoke/css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Connexion</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" id="username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mot de passe :</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" required>
+                    <span id="toggle-password" class="toggle-password">👁️</span>
+                </div>
+            </div>
+
+            <div class="remember-me">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Se souvenir de moi</label>
+            </div>
+            
+            <button type="submit">Se Connecter</button>
+            <p id="error-message" class="error-message"></p>
+        </form>
+    </div>
+
+    <script src="/evoke/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+/* --- /projet/css/projet.css --- */
+
+/* Conteneur pour la liste des projets */
+.project-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-menu-item {
+    padding: 15px 15px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    background-color: var(--bg-secondary); /* Couleur de fond plus visible */
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.2s, transform 0.1s;
+    font-weight: 700;
+}
+
+.project-menu-item:hover {
+    background-color: var(--hover-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project-menu-item.active {
+    background-color: var(--accent-color);
+    color: var(--bg-primary); /* Texte très clair sur fond accentué */
+    border-color: var(--accent-color);
+}
+
+/* Styles pour le panneau de droite (Détails du Projet) */
+.project-detail-panel {
+    padding: 0;
+}
+
+.project-detail-panel h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.project-detail-panel h2 {
+    color: var(--text-color);
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+.project-detail-panel p {
+    line-height: 1.6;
+}

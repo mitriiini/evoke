@@ -1,0 +1,54 @@
+/* === Version et Help en bas à droite === */
+.version-box {
+  position: fixed;
+  bottom: 8px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-family: "Poppins", sans-serif;
+  padding: 4px 8px;
+  color: inherit;
+  z-index: 100000;
+  cursor: default;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+
+/* Bouton Help */
+.version-help {
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  color: inherit;
+  transition: 0.3s;
+}
+
+.version-help:hover {
+  text-decoration: underline;
+}
+
+/* Info affichée quand survolé ou cliqué */
+.version-info {
+  position: absolute;
+  bottom: 28px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(5px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.version-info.show {
+  opacity: 1;
+  transform: translateY(0);
+}

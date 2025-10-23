@@ -1,0 +1,231 @@
+/* Conteneur principal de la barre d'input (utilisé pour le wrapper dans chat_ui.js) */
+.chat-input-area {
+    padding: 10px 20px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    flex-shrink: 0; 
+}
+
+/* 🆕 Wrapper interne pour gérer la position relative du statut d'enregistrement/emoji */
+.input-wrapper {
+    position: relative;
+}
+
+/* Formulaire Flex - Structure de base (Icones Gauche + Input + Bouton Envoi) */
+#chat-form-new {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: relative;
+    z-index: 10; 
+    background-color: var(--bg-secondary);
+}
+
+/* Input de Texte Épuré */
+#chat-input-text {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px; 
+    background-color: var(--bg-content);
+    color: var(--text-color);
+    outline: none;
+    font-size: 0.95em;
+    height: 40px; 
+}
+
+/* Groupe d'icônes à gauche */
+.input-actions-left {
+    display: flex;
+    gap: 5px; 
+    align-items: center;
+}
+
+/* Style général pour tous les boutons d'icônes */
+.input-icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary); 
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.5em; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    border-radius: 50%; 
+}
+
+.input-icon-btn:hover {
+    color: var(--accent-color);
+    background-color: var(--hover-bg);
+}
+
+/* Style des SVG dans les boutons d'icônes */
+.input-icon-btn svg {
+    fill: currentColor; /* Utilise la couleur du parent */
+    width: 24px;
+    height: 24px;
+}
+
+/* Bouton d'Envoi (icône unique) */
+#send-button-new {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    font-size: 1.5em;
+    margin-left: 5px;
+    flex-shrink: 0;
+}
+
+#send-button-new:hover {
+    background-color: var(--accent-color-hover);
+}
+
+#send-button-new:active {
+    transform: scale(0.9);
+}
+
+/* Style des SVG dans le bouton d'envoi */
+#send-button-new svg {
+    fill: white;
+    width: 24px;
+    height: 24px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 🆕 BARRE D'ENREGISTREMENT VOCAL FIXÉE (SOUS L'INPUT) */
+/* ------------------------------------------------------------------ */
+.recording-bar {
+    display: none; /* Caché par JS par défaut */
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
+    background-color: var(--bg-content);
+    border: 1px solid #dc3545;
+    border-radius: 8px;
+    height: 40px;
+    width: 100%;
+}
+
+.cancel-recording-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.cancel-recording-btn svg {
+    fill: currentColor;
+    width: 20px;
+    height: 20px;
+}
+
+.recording-visual {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 8px;
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.recording-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #dc3545;
+    border-radius: 50%;
+    animation: pulse 1s infinite alternate;
+}
+
+#recording-timer {
+    font-size: 1.1em;
+    min-width: 45px; /* Pour éviter le saut */
+}
+
+.recording-text {
+    color: var(--text-secondary);
+    font-weight: normal;
+    font-style: italic;
+}
+
+.send-audio-btn-bar {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-left: 10px;
+    transition: background-color 0.2s;
+}
+
+.send-audio-btn-bar svg {
+    fill: white;
+    width: 20px;
+    height: 20px;
+}
+
+.send-audio-btn-bar:hover {
+    background-color: #b02a37;
+}
+
+/* --- Sélecteur d'Émojis (Nouveau) --- */
+.emoji-picker {
+    position: absolute;
+    bottom: 55px; 
+    left: 40px; /* Aligné avec l'icône d'emoji */
+    background-color: var(--bg-content);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    flex-wrap: wrap;
+    gap: 8px; /* Plus d'espace pour les nouveaux émojis */
+    max-width: 250px; /* Taille augmentée pour plus d'émojis */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    
+    /* 🛑 CORRECTION: Ajout d'une hauteur maximale et du défilement */
+    **max-height: 200px;** /* Hauteur maximale du conteneur d'émojis */
+    **overflow-y: auto;** /* Active le défilement vertical si le contenu dépasse */
+}
+
+.emoji-item {
+    cursor: pointer;
+    font-size: 1.4em; /* Émojis plus grands */
+    padding: 2px;
+    border-radius: 4px;
+    transition: background-color 0.1s;
+    line-height: 1;
+}
+
+.emoji-item:hover {
+    background-color: var(--hover-bg);
+}
+
+
+/* Animation Pulse */
+@keyframes pulse {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
+}

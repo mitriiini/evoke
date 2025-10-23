@@ -1,0 +1,818 @@
+/* Styles pour le Conteneur de la Vue de Chat */
+#content-right {
+    height: 100%;
+    display: flex;
+}
+
+/* Nouveau wrapper pour la structure fixe (Header/Message/Input) */
+.chat-detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* CORRECTION CLÉ: Le corps des messages (scrollable) */
+.message-container {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Styles pour la navigation (Left Panel) */
+/* ------------------------------------------------------------------ */
+
+#chat-menu {
+    /* Assurez-vous que le conteneur du menu permet le scroll si la liste est longue */
+    overflow-y: auto; 
+}
+
+#chat-menu-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chat-menu-section {
+    /* Ajout d'une transition pour une bascule douce */
+    transition: all 0.3s ease-out; 
+}
+
+/* Style de l'en-tête de section (cliquable) */
+.section-header {
+    padding: 10px 15px 5px;
+    margin-top: 0; 
+    font-size: 1em;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.section-header:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Style de l'icône de bascule */
+.toggle-icon {
+    fill: var(--text-secondary);
+    transition: transform 0.3s;
+}
+
+/* État rétracté: l'icône pointe vers la droite */
+.chat-menu-section:not(.expanded) .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+/* État étendu: l'icône pointe vers le bas */
+.chat-menu-section.expanded .toggle-icon {
+    transform: rotate(0deg);
+}
+
+
+/* Contenu de la section */
+.section-content {
+    overflow: hidden;
+    /* La max-height est gérée par JS pour la transition de bascule */
+    max-height: fit-content; 
+    transition: max-height 0.3s ease-in-out; 
+    padding: 0 5px; /* Petit padding pour les items (pour le border-radius) */
+}
+
+/* État rétracté: pas de hauteur */
+.chat-menu-section:not(.expanded) .section-content {
+    max-height: 0 !important; /* Force la hauteur à zéro lors de la contraction */
+}
+
+/* Liste des chats (Contacts et Canaux) */
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    /* 🛑 Correction: Ajout d'une marge et d'un rayon pour les coins arrondis */
+    margin: 3px 0;
+    border-radius: 8px; 
+    border-bottom: none; /* La bordure est retirée pour favoriser le border-radius */
+    position: relative; 
+}
+
+/* Le survol est maintenu, sauf pour le canal sélectionné (pour éviter un double-background) */
+.chat-item:hover {
+    background-color: var(--hover-bg);
+}
+
+.chat-item.selected {
+    /* Style de sélection par défaut pour les chats privés */
+    background-color: var(--selected-bg, #e0e0e0); 
+}
+
+
+/* MODIFICATION CLÉ: Style pour les CANAUX */
+.chat-item.channel-item {
+    /* Retrait des bordures pour que le radius soit propre */
+    border: none; 
+    background-color: var(--channel-color, #2196F3); /* Couleur par défaut si non défini par JS */
+    /* Assure que la couleur de fond couvre toute la ligne visible dans le panneau */
+}
+
+/* 🛑 CORRECTION 1: Suppression du hover/selection par défaut pour les canaux pour garder leur couleur */
+.chat-item.channel-item:hover {
+    /* Rendre le survol subtil si le canal a une couleur de fond */
+    opacity: 0.95; 
+    background-color: var(--channel-color) !important; /* Maintenir la couleur de base */
+}
+
+/* Style de sélection pour les canaux */
+.chat-item.channel-item.selected {
+    /* Ajout d'une bordure visible pour indiquer la sélection */
+    border: 2px solid var(--accent-color); 
+    padding: 8px 13px; /* Ajuster le padding à cause de la bordure */
+    background-color: var(--channel-color) !important; /* Maintenir la couleur du canal */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Ajout d'une légère ombre pour l'effet "sélectionné" */
+    
+}
+/* Le chat-item a déjà 100% de la largeur du .section-content parent (qui a un padding), ce qui devrait suffire. */
+
+
+/* Corrige le padding et l'alignement pour les canaux (qui n'ont pas de PDP) */
+.chat-item.channel-item .chat-info.channel-info-only {
+    flex-direction: row; 
+    align-items: center;
+    gap: 10px; 
+}
+
+/* Cache l'icône/image pour les canaux (elles ne sont plus utilisées) */
+.chat-item.channel-item img,
+.chat-item .channel-color-square {
+    display: none; 
+}
+
+/* Réinitialise les styles par défaut pour les chats privés */
+.chat-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    display: block; /* S'assurer qu'elle est visible dans les chats privés */
+}
+
+.chat-item .chat-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-item .chat-info strong {
+    font-size: 0.9em;
+}
+
+.status-indicator {
+    font-size: 0.75em;
+    margin-top: 2px;
+}
+
+.status-indicator.online {
+    color: #4CAF50; /* Vert */
+}
+
+.status-indicator.offline {
+    color: var(--text-secondary); /* Gris */
+}
+
+/* Indicateur de Non Lu (Point) */
+.unread-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-color); /* Couleur par défaut (pour les chats privés) */
+    border-radius: 50%;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+/* Indicateur 'Vu' pour le chat privé (mon message a été lu) */
+.seen-indicator {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+    font-size: 0.65em;
+    padding: 1px 5px;
+    border-radius: 8px;
+    margin-left: 5px;
+    flex-shrink: 0;
+}
+
+/* 🛑 Correction: Espace de création de canal (maintenant entre canaux et privés) */
+#channel-creation-area {
+    padding: 10px 15px;
+    /* Ajout d'une petite marge en bas pour séparer des chats privés */
+    margin-bottom: 10px; 
+    border-top: 1px solid var(--border-color); 
+}
+
+.add-channel-btn {
+    width: 100%;
+    padding: 8px;
+    background-color: var(--bg-primary);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.add-channel-btn:hover {
+    background-color: var(--hover-bg);
+}
+
+/* ------------------------------------------------------------------ */
+/* Styles pour le Chat Detail (Right Panel) */
+/* ------------------------------------------------------------------ */
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    flex-shrink: 0; 
+}
+
+/* Carré de couleur pour l'en-tête du canal */
+.chat-header-color-square {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px; 
+    margin-right: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.chat-header-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.chat-info {
+    flex-grow: 1;
+}
+
+/* 🛑 CORRECTION 2: Style pour le nom du canal dans l'en-tête (pour être en couleur si possible) */
+.chat-info h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+/* Style spécifique pour le nombre de membres dans un canal */
+.chat-info .channel-member-count {
+    font-size: 0.8em;
+    color: var(--text-secondary); /* Garde la couleur secondaire pour le nombre de membres */
+}
+
+
+/* Bouton des 3 points (Options de gestion de canal) */
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+    background-color: var(--hover-bg);
+}
+
+.icon-btn svg {
+    display: block;
+    fill: currentColor;
+}
+
+
+/* Reste inchangé */
+.chat-info span {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+}
+
+#user-status-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.typing-indicator {
+    font-size: 0.8em;
+    color: #FF9800; /* Orange pour le statut d'écriture */
+    display: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Styles pour les messages individuels (Inchangé) */
+/* ------------------------------------------------------------------ */
+
+/* 1. Conteneur principal du message (contient Message_Group + Time) */
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: fit-content;
+    max-width: 80%;
+    position: relative;
+}
+
+/* Messages envoyés (de moi) - ALIGNEMENT À DROITE */
+.message.sent {
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+/* Messages reçus (des autres) - ALIGNEMENT À GAUCHE */
+.message.received {
+    align-self: flex-start;
+    margin-right: auto;
+}
+
+/* 2. Groupe principal (PDP + Nom + Bulle) */
+.message-group {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3px;
+}
+
+/* Messages reçus : PDP à gauche, Bulle à droite */
+.message.received .message-group {
+    flex-direction: row;
+}
+
+/* Messages envoyés : PDP à droite, Bulle à gauche */
+.message.sent .message-group {
+    flex-direction: row-reverse;
+}
+
+/* 3. Wrapper pour le PDP (afin de le positionner) */
+.pdp-wrapper {
+    display: flex;
+    align-self: flex-end;
+    margin: 0 5px;
+    flex-shrink: 0;
+}
+
+/* 4. PDP (Photo de Profil - à côté) */
+.message-pdp {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--border-color);
+    display: block;
+}
+
+/* 5. Wrapper des infos (Nom + Bulle) */
+.message-block-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    position: relative; /* Pour positionner les réactions */
+}
+
+/* 6. Conteneur du Nom (au-dessus du bloc) */
+.sender-name-container {
+    margin-bottom: 2px;
+}
+
+.message.sent .sender-name-container {
+    text-align: right;
+}
+
+.message.received .sender-name-container {
+    text-align: left;
+}
+
+.sender-name-text {
+    font-size: 0.7em;
+    opacity: 0.7;
+    color: var(--text-secondary);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 7. Bulle de texte (contenu du message) */
+.message-content {
+    padding: 8px 12px;
+    border-radius: 18px;
+    position: relative;
+    word-wrap: break-word;
+    max-width: 100%;
+    display: inline-block;
+}
+
+.message-content p {
+    margin: 0;
+    line-height: 1.4;
+    font-size: 0.9em;
+}
+
+/* Style spécifique pour les messages envoyés */
+.message.sent .message-content {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+    border-bottom-right-radius: 4px;
+}
+
+/* Style spécifique pour les messages reçus */
+.message.received .message-content {
+    background-color: var(--bg-secondary);
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
+}
+
+/* Styles pour les éléments média */
+.chat-media {
+    display: block;
+    margin: 0;
+    color: inherit;
+}
+
+.chat-media.image {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer; 
+}
+
+.chat-media.video {
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 8px;
+}
+
+.chat-media.audio {
+    width: 200px;
+    max-width: 100%;
+}
+
+.chat-media.file-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+}
+
+/* Container pour les boutons d'actions (Téléchargement, Réaction) */
+.message-actions {
+    position: absolute;
+    bottom: -10px; 
+    right: 5px;
+    display: flex;
+    gap: 5px;
+    opacity: 0; 
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+.message.received .message-actions {
+    left: 5px;
+    right: auto;
+}
+
+.message-block-wrapper:hover .message-actions {
+    opacity: 1; 
+}
+
+/* Styles pour les boutons d'action individuels */
+.download-btn, .reaction-add-btn {
+    background: var(--bg-primary); 
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.download-btn svg, .reaction-add-btn svg {
+    fill: var(--text-secondary);
+    width: 18px;
+    height: 18px;
+}
+
+/* Styles pour les réactions (badges au-dessous) */
+.reactions-container {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    align-self: flex-start;
+    padding-left: 5px;
+}
+
+.message.sent .reactions-container {
+    align-self: flex-end;
+    padding-right: 5px;
+    padding-left: 0;
+}
+
+.reaction-badge {
+    background-color: var(--bg-content);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.75em;
+    cursor: pointer;
+    transition: background-color 0.1s, transform 0.1s;
+    white-space: nowrap;
+}
+
+.reaction-badge.reacted-by-me {
+    border-color: var(--accent-color);
+    background-color: var(--accent-color-light);
+}
+
+.reaction-badge:hover {
+    transform: scale(1.05);
+    background-color: var(--hover-bg);
+}
+
+/* 8. Heure (en dehors, en bas) */
+.message-time-outside {
+    font-size: 0.65em;
+    white-space: nowrap;
+    opacity: 0.8;
+    color: var(--text-secondary);
+    margin-top: 3px;
+}
+
+/* Alignement de l'heure en bas à droite pour les messages envoyés */
+.message.sent .message-time-outside {
+    align-self: flex-end;
+}
+
+/* Alignement de l'heure en bas à gauche pour les messages reçus */
+.message.received .message-time-outside {
+    align-self: flex-start;
+}
+
+
+/* ------------------------------------------------------------------ */
+/* STYLES MODAL IMAGE FULLSCREEN (Inchangé) */
+/* ------------------------------------------------------------------ */
+.image-modal {
+    display: none; 
+    position: fixed;
+    z-index: 100; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); 
+    justify-content: center;
+    align-items: center;
+}
+
+.image-modal-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#modal-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: block;
+    margin: auto;
+    transition: transform 0.2s ease-out; 
+    cursor: grab;
+}
+
+.close-btn, .zoom-btn {
+    position: absolute;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 101; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Bouton Fermer (en haut à droite) */
+.close-btn {
+    top: 20px;
+    right: 20px;
+}
+
+/* Boutons Zoom (en bas à droite) */
+#zoom-in-btn {
+    bottom: 20px;
+    right: 70px;
+}
+
+#zoom-out-btn {
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Styles pour les SVG dans les boutons */
+.close-btn svg, .zoom-btn svg {
+    fill: white;
+    width: 24px;
+    height: 24px;
+}
+
+/* ------------------------------------------------------------------ */
+/* STYLES POUR LES MODALES INTERNES (CRÉATION/GESTION DE CANAL) (Inchangé, mais vérifié) */
+/* ------------------------------------------------------------------ */
+
+.custom-modal {
+    display: none; 
+    position: fixed;
+    z-index: 102; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); 
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.modal-header .close-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+
+.modal-body label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.modal-body input[type="text"],
+.modal-body input[type="color"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--bg-primary);
+    color: var(--text-color);
+}
+
+.modal-body input[type="color"] {
+    height: 40px;
+}
+
+/* Liste des checkboxes des membres */
+.member-checkbox-list {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.member-checkbox-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.member-checkbox-item input[type="checkbox"] {
+    margin-right: 10px;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--accent-color);
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.member-checkbox-item input[type="checkbox"]:checked {
+    background-color: var(--accent-color);
+}
+
+.member-checkbox-item input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    color: var(--bg-primary); 
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.member-checkbox-item label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+    font-weight: normal;
+    font-size: 0.9em;
+}
+
+.member-checkbox-item label img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 15px;
+}
+
+.primary-btn {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.primary-btn:hover {
+    background-color: var(--accent-color-dark);
+}

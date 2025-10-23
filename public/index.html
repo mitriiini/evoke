@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVOKE</title>
+    <link rel="stylesheet" href="/default/css/version.css">
+    <!-- <link rel="stylesheet" href="/default/css/spal.css"> -->
+    <link rel="stylesheet" href="/default/css/style.css">
+    <link rel="stylesheet" href="/default/css/login.css">
+    <link rel="icon" href="/default/images/ico/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    
+<div id="login-overlay" class="overlay active">
+  <div class="login-box">
+    <div class="login-header">
+      <img src="/default/images/png/logo.png" alt="Logo Evoke" class="login-logo">
+      <div class="loader-container">
+        <div class="loader-wrapper">
+          <span class="loader-letter">v</span>
+          <span class="loader-letter">o</span>
+          <span class="loader-letter">k</span>
+          <span class="loader-letter">e</span>
+          <div class="loader"></div>
+        </div>
+      </div>
+    </div>
+
+    <form id="login-form">
+      <div class="inputGroup">
+        <input type="text" id="username" name="username" required autocomplete="off">
+        <label for="username">identifiant</label>
+      </div>
+
+      <div class="inputGroup">
+        <input type="password" id="password" name="password" required autocomplete="off">
+        <label for="password">clé de sécurite</label>
+        <img src="/default/images/png/hide.png" alt="Afficher le mot de passe" class="toggle-password" id="toggle-password">
+      </div>
+
+      <button type="submit" id="login-button">Accéder</button>
+      <p id="login-message" class="error-message"></p>
+    </form>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-left">
+    <img src="/default/images/png/logotype.png" alt="Logo de l'entreprise" class="logo">
+  </div>
+  <div class="header-right">
+    <div class="profile-header">
+      <img src="" alt="Photo de profil" class="profile-avatar" id="profil-header-img">
+    </div>
+  </div>
+</header>
+
+<div class="main-layout">
+  <aside id="sidebar" class="sidebar expanded">
+    <button id="toggle-sidebar" class="header-btn sidebar-toggle-btn">
+      <span class="icon">&#9776;</span>
+    </button>
+    
+    <nav class="sidebar-nav-top">
+      <a href="#" class="nav-item" data-view="checking">
+        <img src="/default/images/png/checking.png" alt="Checking Icon" class="nav-icon-img">
+        <span class="nav-text">Checking</span>
+      </a>
+      <a href="#" class="nav-item" data-view="messaging">
+        <img src="/default/images/png/messaging.png" alt="Messaging Icon" class="nav-icon-img">
+        <span class="nav-text">Messaging</span>
+      </a>
+      <a href="#" class="nav-item" data-view="training">
+        <img src="/default/images/png/formation.png" alt="Training Icon" class="nav-icon-img">
+        <span class="nav-text">Formations</span>
+      </a>
+      <a href="#" class="nav-item" data-view="production">
+        <img src="/default/images/png/production.png" alt="Production Icon" class="nav-icon-img">
+        <span class="nav-text">Production</span>
+      </a>
+      <a href="#" class="nav-item" data-view="archive">
+        <img src="/default/images/png/archive.png" alt="Archive Icon" class="nav-icon-img">
+        <span class="nav-text">Archive</span>
+      </a>
+      <a href="#" class="nav-item" data-view="setting">
+        <img src="/default/images/png/setting.png" alt="Setting Icon" class="nav-icon-img">
+        <span class="nav-text">Setting</span>
+      </a>
+    </nav>
+    
+    </aside>
+
+  <main class="main-content">
+    <div id="content-left" class="content-panel content-left"></div>
+    <div id="content-right" class="content-panel content-right"></div>
+  </main>
+</div>
+<script src="/default/js/version.js"></script>
+<script type="module" src="/default/js/firebase-init.js"></script>
+<script src="/default/js/login.js"></script>
+<script src="/default/js/script.js"></script>
+</body>
+</html>

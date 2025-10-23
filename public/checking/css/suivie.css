@@ -1,0 +1,376 @@
+/* /checking/css/suivie.css */
+
+/* --- Conteneur Principal --- */
+.suivie-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* --- Contrôles et Calculs (TOUJOURS EN HAUT) --- */
+.suivie-controls-wrapper {
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Le conteneur principal est transparent et flou */
+    background-color: transparent; 
+    backdrop-filter: blur(5px); 
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.suivie-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+}
+
+.filter-group label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+/* Style des Icônes pour les contrôles */
+.control-icon {
+    color: var(--primary-color);
+    font-size: 1.1em;
+    line-height: 1;
+}
+
+/* Rendre les select et date inputs transparents (simulant le flou hérité du parent) */
+.filter-group select, .filter-group input[type="date"] {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 1em;
+    font-weight: 500;
+    transition: border-color 0.2s;
+    
+    /* Le fond du sélecteur et des dates est transparent */
+    background-color: transparent; 
+}
+
+.filter-group select:focus, .filter-group input[type="date"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Calculs (Embelli et simple) */
+.suivie-summary-calculation {
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px solid var(--border-color);
+}
+
+.summary-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.summary-card {
+    flex: 1 1 200px;
+    padding: 15px;
+    background-color: var(--background-tertiary);
+    border-radius: 6px;
+}
+
+.summary-label {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.summary-info {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    margin-top: 15px !important;
+}
+
+
+/* --- Contenu Principal (Calendrier Gauche / Détails Droite) --- */
+.suivie-main-content {
+    display: flex;
+    gap: 20px;
+    flex-direction: row; 
+    flex-wrap: nowrap;
+}
+
+.suivie-agenda-wrapper {
+    /* Calendrier à 230px */
+    flex: 0 0 230px; 
+    max-width: 100%;
+    min-width: 230px; 
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--background-secondary);
+}
+
+.suivie-detail-view {
+    flex: 1 1 auto; 
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--background-secondary);
+}
+
+.detail-placeholder, .no-records-message {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.detail-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color); 
+    color: var(--text-primary);
+}
+
+/* --- Calendrier (Mois Unique) --- */
+.month-navigation {
+    /* ✨ CORRECTION 1: Conteneur principal pour la navigation et le bouton Aujourd'hui */
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Flèche, Mois, Bouton/Flèche */
+    align-items: center;
+    gap: 5px; /* Réduit l'espace pour maximiser l'espace du calendrier */
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+
+/* Groupe des flèches/bouton à droite */
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: flex-end; /* Aligner à droite */
+}
+
+/* Style du bouton Aujourd'hui */
+.today-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    /* ✨ CORRECTION 2: Bordure arrondie */
+    border-radius: 12px; 
+    font-size: 0.75em; /* Rendu plus petit pour le mini agenda */
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.today-button:hover {
+    background-color: var(--hover-color);
+    color: var(--text-primary);
+}
+
+.month-header {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.nav-arrow {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    font-size: 1em;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.nav-arrow:hover {
+    background-color: var(--hover-color);
+    border-color: var(--primary-color);
+}
+
+.month-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.day-of-week-header {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.75em;
+}
+
+/* Gris pour les en-têtes Samedi et Dimanche */
+.day-of-week-header:nth-child(6),
+.day-of-week-header:nth-child(7) {
+    color: #888;
+}
+
+/* Cellules de jour */
+.day-cell {
+    padding: 5px 3px;
+    text-align: center;
+    border: 2px solid transparent; 
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, border-color 0.2s;
+    border-radius: 4px;
+    line-height: 1;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85em;
+    background-color: var(--background-primary);
+    color: var(--text-primary);
+}
+
+.day-valid:hover:not(.day-selected) {
+    background-color: var(--hover-color);
+}
+
+.day-empty {
+    background-color: var(--background-secondary);
+    cursor: default;
+    border: none;
+}
+
+/* Jours de Week-end (Samedi et Dimanche) forcés en gris et désactivés */
+.month-days-grid .day-cell:nth-child(7n-1),
+.month-days-grid .day-cell:nth-child(7n) {
+    background-color: #f0f0f0;
+    color: #888;
+    cursor: default !important;
+    border-color: transparent !important;
+}
+
+.month-days-grid .day-cell:nth-child(7n-1):hover,
+.month-days-grid .day-cell:nth-child(7n):hover {
+    background-color: #f0f0f0; 
+}
+
+
+/* Bordures de statut */
+
+/* Jour non coché (Bordure Rouge) */
+.day-unchecked {
+    border-color: #f44336; 
+}
+
+/* Jour partiellement coché (Bordure Jaune) */
+.day-checked-partial {
+    border-color: #ffc107; 
+}
+
+/* Jour coché complet (Bordure Verte) */
+.day-checked-complete {
+    border-color: #4CAF50; 
+}
+
+/* Jour actuel (Aujourd'hui) */
+.day-today {
+    background-color: #007BFF !important; /* Fond Bleu */
+    border-color: #007BFF !important; 
+    color: white !important; /* Texte blanc pour la lisibilité sur fond bleu */
+}
+
+/* Le jour d'aujourd'hui doit prendre le dessus sur les bordures de statut */
+.day-today.day-unchecked,
+.day-today.day-checked-partial,
+.day-today.day-checked-complete {
+    border-color: #007BFF !important;
+}
+
+/* Jour sélectionné (Violet, texte non inversé) */
+.day-selected {
+    border: 2px solid #8A2BE2 !important; /* Bordure violette */
+    background-color: #8A2BE2 !important; /* Fond violet */
+    color: var(--text-primary) !important; /* Conserve la couleur du texte du thème */
+    font-weight: bold;
+}
+
+
+/* --- Styles des tableaux de détail --- */
+
+.suivie-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.suivie-table thead {
+    border-bottom: 2px solid var(--border-color);
+}
+
+.suivie-table th, .suivie-table td {
+    padding: 10px;
+    text-align: left;
+    border-right: 1px solid var(--border-color);
+}
+
+.suivie-table th:last-child, .suivie-table td:last-child {
+    border-right: none !important;
+}
+
+.suivie-table thead th {
+    background-color: var(--background-tertiary);
+    font-weight: 500;
+    font-size: 0.85em;
+    color: var(--text-secondary);
+}
+
+.suivie-table tbody tr {
+    background-color: var(--background-primary);
+    font-size: 0.9em;
+}
+
+.suivie-table tbody tr:hover {
+    background-color: var(--hover-color);
+}
+
+
+/* --- Styles des Indicateurs d'Alertes/Succès dans les Tables --- */
+.text-ok {
+    color: green;
+    font-weight: bold;
+}
+.text-alert {
+    color: red;
+    font-weight: bold;
+}
+
+/* Media Queries pour les petits écrans */
+@media (max-width: 768px) {
+    .suivie-main-content {
+        flex-wrap: wrap; 
+        flex-direction: column; 
+    }
+    .suivie-agenda-wrapper, .suivie-detail-view {
+        flex: 1 1 100%;
+        min-width: initial;
+    }
+    .summary-card-container {
+        flex-direction: column;
+    }
+}
